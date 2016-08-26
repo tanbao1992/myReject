@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>轮播</title>
+		
+		<link rel="stylesheet/less" " href="css.less"/>
+		
+		<script src="less.js"></script>
+		
+		<script src="jquery.js"></script>
+		
+	</head>
+	<body>
+		<div class="container">
+			<img  src="images/p1big.jpg" class="action"/>
+			<img  src="images/p6big.jpg" />
+			<img  src="images/p2big.jpg"/>
+			<img  src="images/p3big.jpg"/>
+			<img  src="images/p4big.jpg"/>
+			<img  src="images/p5big.jpg"/>
+			<div id="dome">
+				<ul>
+					<li class="show"></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var imgs = $('img')
+		
+		var allLi = $('li')
+		//给li加数字
+		for(var i = 0;i<allLi.length;i++){
+			$(allLi[i]).append(i+1)
+		}
+		//定时器
+			var  start = 0
+			
+		var timer =	setInterval(auto,1000);
+		function auto(){
+				
+				start++
+				
+				if(start>=6){
+					
+					start = 0
+					
+				}
+				$('.action').removeClass()
+				
+				
+				
+				$('img').eq(start).css('opacity','1').siblings('img').css('opacity',0)
+//				alert(start)
+				
+			    
+				$('li').eq(start).css('background','red').siblings(allLi).css('background-color','white')	
+		}
+		
+			//当悬停的时候清除定时器并设置悬停时的效果和悬停结束时的效果
+			
+			$('li').hover(function(){
+			//清除定时器			
+			clearInterval(timer)
+			$(this).css('background-color','red').siblings(this).css('background-color','white')
+			
+				var index = $(this).index()
+				
+				$(imgs).css('opacity',0)
+//				
+				$(imgs[index]).css('opacity','1')
+//				
+			},function(){
+//				//开启定时器从当前图片位置开启
+              start = $(this).index();
+             timer =  setInterval(auto,1000);
+//				
+		})
+			
+		</script>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>倒计时</title>
+		<script src="js插件/JQuery.js"></script>
+		<style type="text/css">
+		    body{
+		    	margin: 0;
+		    	background-color: silver;
+		    }
+			div {
+				width: 1000px;
+				height: 200px;
+				color: green;
+				margin: 300px auto;
+				font-size: 30px;
+				line-height: 200px;
+				text-align: center;
+				border: 1px solid orangered;
+				border-radius: 10px;
+				box-shadow: 0 0 orange;
+			}
+		</style>
+	</head>
+
+	<body>
+        <div class="container">
+        	
+        </div>
+	</body>
+	<script type="text/javascript">
+	
+	function countDown(){
+		
+		//获取现在的时间毫秒数
+		var startTime = new Date().getTime()
+		
+		//获取结束的的时间毫秒数
+		var endTime = new Date("Mon Aug 29 2016 18:00:00 GMT+0800").getTime()
+
+		//获取倒计时的总秒数
+        var allSeconds = (endTime - startTime) / 1000
+        
+        //获取天数
+		var days = Math.floor(allSeconds / (3600 * 24))
+		days = days < 10 ? '0' + days : days
+		
+		//获取小时
+		var hours = Math.floor((allSeconds - days * 3600 * 24) / 3600)
+		hours = hours < 10 ? '0' + hours : hours
+			
+        //获取分钟
+		var minutes = Math.floor((allSeconds - days * 3600 * 24 - hours * 3600) / 60)
+		minutes = minutes < 10 ? '0' + minutes : minutes
+		
+		//获取秒
+		var seconds = Math.floor(allSeconds - days * 3600 * 24 - hours * 3600 - minutes * 60)
+		seconds = seconds < 10 ? '0' + seconds : seconds
+			
+        //拼接字符串
+		var str = '距离彩票开奖还有：' + days + '天' + hours + '小时' + minutes + '分钟' + seconds + '秒'
+        
+        //将拼接的字符串放到一个容器中
+        var mydiv = document.querySelector('.container')
+		mydiv.innerHTML = str
+	}
+	
+	countDown()
+		
+		setInterval(function(){
+			
+			countDown()
+			
+		},1000)
+		
+	</script>
+
+</html>
